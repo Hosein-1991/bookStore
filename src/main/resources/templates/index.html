@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Book Store</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+        #books {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #books td, #books th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #books tr:nth-child(even){background-color: #f2f2f2;}
+
+        #books tr:hover {background-color: #ddd;}
+
+        #books th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div class="container my-5 ">
+    <h1 class="text-center">Books Store<br>(Spring Boot & Elasticsearch Application)<br/>
+    </h1>
+    <a th:href="@{/showNewBookForm}" class="btn btn-primary m-3"> Add Book </a>
+    <a href="/" class="btn btn-danger text-right">Go Home</a>
+
+
+    <table id="books" border="1" class="table table-striped table-responsive-md">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bookDocument : ${listBookDocuments}">
+            <td th:text="${bookDocument.id}"></td>
+            <td th:text="${bookDocument.name}"></td>
+            <td th:text="${bookDocument.description}"></td>
+            <td th:text="${bookDocument.price}"></td>
+            <td><a th:href="@{/showFormForUpdate/{id}(id=${bookDocument.id})}" class="btn btn-success">Update</a>
+                <a th:href="@{/deleteBook/{id}(id=${bookDocument.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
